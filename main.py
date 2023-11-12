@@ -1,3 +1,4 @@
+# Import the necessary packages
 from typing import List
 from uuid import UUID
 from fastapi import FastAPI, HTTPException
@@ -6,12 +7,12 @@ from models import Gender, Role, User, UserUpdateRequest
 # Create a fastapi instance
 app = FastAPI()
 
-# Create a database with a list of users
+# DATABASE(db) : Create a database with a list of users
 db : List[User] = [
     User (
         id = UUID("b61c6edc-6a81-43f4-9e7b-3077884c392d"),
-        first_name = "Jamila",
-        last_name = "Ahmed",
+        first_name = "Lisa",
+        last_name = "Tyfold",
         middle_name = " ",
         gender = Gender.female,
         roles = [Role.student]
@@ -29,9 +30,9 @@ db : List[User] = [
 # Create a root when the app loads up
 @app.get("/")
 async def root():
-    return {"Hello" : "World"}
+    return {"Welcome to a basic fastapi application. This is app creates, reads, updates and deletes users from a database. Give it a shot!"}
 
-# Get the list of users
+# Fetch the list of users stored in the db initially
 @app.get("/api/v1/users")
 async def fetch_users():
     return db
@@ -43,6 +44,7 @@ async def register_user(user : User):
     db.append(user)
     return {"id" : user.id}
 
+# Deletes a user
 @app.delete("/api/v1/users/{user_id}")
 async def delete_user(user_id : UUID):
     for user in db:
@@ -55,6 +57,7 @@ async def delete_user(user_id : UUID):
         detail = f"user with user id: {user_id} does not exist"
     )    
 
+# Updates a user
 @app.put("/api/v1/users/{user_id}")
 async def update_user(user_update : UserUpdateRequest, user_id : UUID):
     for user in db:
