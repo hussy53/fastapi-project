@@ -7,6 +7,8 @@ Task: **Explore the members of the university and make changes when needed**. In
 
 Description: This application does basic CRUD operations. The application includes a FastApi server connected to a dummy database (db) of users. Initially there are two users contained in the database. Take advantage of the operations to explore and alter the database.
 
+Credits: https://www.youtube.com/watch?v=GN6ICac3OXY&t=535s
+
 
 ## Prerequisites
 On your machine:
